@@ -697,6 +697,7 @@ SABAYON_ENMAN_REPOS     Define additional enman repository to install
       "minimal"
       "xfce"
       "lxqt"
+      "capesos"
     )
 
     if [ $# -eq 0 ] ; then
