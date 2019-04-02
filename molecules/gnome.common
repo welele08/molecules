@@ -9,10 +9,10 @@ release_string: Sabayon Linux
 release_file: /etc/sabayon-edition
 
 # ISO Image title
-iso_title: Sabayon GNOME
+iso_title: SABAYON
 
 # Enable XZ compression in mksquashfs
-extra_mksquashfs_parameters: -comp xz
+extra_mksquashfs_parameters: -b 131072 -comp xz
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and before inner_chroot_script)
@@ -31,9 +31,6 @@ extra_mksquashfs_parameters: -comp xz
 
 # Used to umount /proc and unbind packages dir
 %env error_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_error_script.sh
-
-# Pre-ISO building script. Hook to be able to copy kernel images in place, for example
-%env pre_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_pre_iso_script.sh GNOME
 
 # Destination directory for the ISO image path (MANDATORY)
 %env destination_iso_directory: ${SABAYON_MOLECULE_HOME:-/sabayon}/iso
@@ -70,15 +67,13 @@ packages_to_add:
 	app-dicts/myspell-fr,
 	app-dicts/myspell-it,
 	app-dicts/myspell-nl,
-	app-editors/atom,
 	app-editors/gedit,
-        app-misc/calamares-sabayon,
+	app-misc/calamares-sabayon,
 	app-misc/gnote,
 	app-misc/sabayon-greeter,
 	app-misc/sabayon-version,
 	app-office/libreoffice,
 	app-text/pastebunz,
-	games-action/minetest_game,
 	games-misc/cowsay,
 	gnome-base/gnome-shell,
 	gnome-extra/chrome-gnome-shell,
@@ -87,7 +82,7 @@ packages_to_add:
 	gnome-extra/gnome-power-manager,
 	gnome-extra/gnome-shell-windowlist,
 	gnome-extra/gnome-system-monitor,
-	gnome-extra/gnome-tweak-tool,
+	gnome-extra/gnome-tweaks,
 	gnome-extra/gnome-utils,
 	gnome-extra/gucharmap,
 	gnome-extra/nautilus-sendto,
@@ -98,6 +93,7 @@ packages_to_add:
 	media-libs/libdvdcss,
 	media-libs/libdvdnav,
 	media-libs/libdvdread,
+	media-libs/libopenraw,
 	media-plugins/alsa-plugins,
 	media-sound/rhythmbox,
 	media-sound/pavucontrol,
@@ -111,9 +107,9 @@ packages_to_add:
 	net-fs/samba,
 	net-irc/hexchat,
 	net-misc/networkmanager,
-	net-misc/networkmanager-openvpn,
-	net-misc/networkmanager-pptp,
-	net-misc/networkmanager-vpnc,
+	net-vpn/networkmanager-openvpn,
+	net-vpn/networkmanager-pptp,
+	net-vpn/networkmanager-vpnc,
 	net-misc/ntp,
 	net-p2p/transmission-gtk,
 	net-print/cups,

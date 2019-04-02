@@ -27,14 +27,14 @@ safe_run() {
 sd_enable() {
 	local srv="${1}"
 	local ext=".${2:-service}"
-	[[ -x /usr/bin/systemctl ]] && \
+	[[ -x /bin/systemctl ]] && \
 		systemctl --no-reload enable -f "${srv}${ext}"
 }
 
 sd_disable() {
 	local srv="${1}"
 	local ext=".${2:-service}"
-	[[ -x /usr/bin/systemctl ]] && \
+	[[ -x /bin/systemctl ]] && \
 		systemctl --no-reload disable -f "${srv}${ext}"
 }
 
@@ -114,7 +114,7 @@ sed -i "/^::1/ s/localhost/localhost sabayon/" /etc/hosts
 # setup postfix local mail aliases
 newaliases
 
-equo i sys-boot/plymouth x11-themes/sabayon-artwork-plymouth-default-17
+equo i sys-boot/plymouth x11-themes/sabayon-artwork-plymouth-default
 
 echo "PLYMOUTH THEME LIST:"
 plymouth-set-default-theme --list
@@ -142,6 +142,9 @@ for srv in "${SYSTEMD_SERVICES[@]}"; do
 done
 # Disable syslog in systemd, we use journald
 sd_disable syslog-ng
+
+# Disable Dynamy linker cache rebuilding
+sd_disable ldconfig.service
 
 # Make sure to have lvmetad otherwise anaconda freaks out
 sd_enable lvm2-lvmetad
@@ -236,7 +239,7 @@ rm -rf /var/lib/entropy/*cache*
 # Clean layman dir
 rm -rf /var/lib/layman/* /etc/portage/repos.conf/layman.conf
 # Needed
-touch /var/lib/layman/make.conf 
+touch /var/lib/layman/make.conf
 
 # remove entropy hwhash
 rm -f /etc/entropy/.hw.hash

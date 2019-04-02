@@ -3,7 +3,7 @@
 execution_strategy: iso_remaster
 
 # ISO Image title
-iso_title: Sabayon Server
+iso_title: SABAYON
 
 # Release string
 release_string: Sabayon Linux
@@ -12,7 +12,7 @@ release_string: Sabayon Linux
 release_file: /etc/sabayon-edition
 
 # Enable XZ compression in mksquashfs
-extra_mksquashfs_parameters: -comp xz
+extra_mksquashfs_parameters: -b 131072 -comp xz
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and before inner_chroot_script)
@@ -40,16 +40,18 @@ extra_mksquashfs_parameters: -comp xz
 
 packages_to_add:
 	@wireless,
+	app-editors/vim,
 	app-misc/calamares-sabayon-server,
-	app-text/pastebunz,
-	 x11-base/xorg-server,
-	net-dialup/ppp,
-	net-dialup/rp-pppoe,
+	app-misc/screen,
+	app-misc/tmux,
+	app-text/wgetpaste,
+	x11-base/xorg-server,
 	net-misc/openssh,
 	sys-block/parted,
 	sys-boot/os-prober,
 	sys-fs/btrfs-progs,
 	sys-power/cpupower,
+	sys-process/htop,
 	x11-themes/sabayon-artwork-core,
 	x11-drivers/xf86-video-vmware,
 	x11-themes/sabayon-artwork-grub

@@ -9,10 +9,10 @@ release_string: Sabayon Linux
 release_file: /etc/sabayon-edition
 
 # ISO Image title
-iso_title: Sabayon MATE
+iso_title: SABAYON
 
 # Enable XZ compression in mksquashfs
-extra_mksquashfs_parameters: -comp xz
+extra_mksquashfs_parameters: -b 131072 -comp xz
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and before inner_chroot_script)
@@ -50,15 +50,14 @@ packages_to_add:
 	app-admin/rigo,
 	app-crypt/gnupg,
 	app-misc/sabayon-greeter,
-	app-editors/atom,
 	app-crypt/pinentry-gtk2,
-        app-misc/calamares-sabayon,
+	app-misc/calamares-sabayon,
 	app-text/pastebunz,
 	app-office/libreoffice,
-	games-action/minetest_game,
 	gnome-extra/nm-applet,
 	mate-base/mate,
 	mate-extra/mate-sensors-applet,
+	media-libs/libopenraw,
 	media-plugins/alsa-plugins,
 	media-sound/audacious,
 	media-video/mpv,

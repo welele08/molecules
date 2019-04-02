@@ -3,7 +3,7 @@
 execution_strategy: iso_remaster
 
 # ISO Image title
-iso_title: Sabayon Minimal
+iso_title: SABAYON
 
 # Release string
 release_string: Sabayon Linux
@@ -12,7 +12,7 @@ release_string: Sabayon Linux
 release_file: /etc/sabayon-edition
 
 # Enable XZ compression in mksquashfs
-extra_mksquashfs_parameters: -comp xz
+extra_mksquashfs_parameters: -b 131072 -comp xz
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and before inner_chroot_script)
@@ -56,6 +56,7 @@ packages_to_add:
 	sys-block/parted,
 	sys-boot/os-prober,
 	sys-power/cpupower,
+	sys-process/htop,
 	www-client/midori,
 	x11-themes/adwaita-icon-theme,
 	x11-themes/sabayon-artwork-core,

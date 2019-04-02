@@ -9,10 +9,10 @@ release_string: Sabayon Linux
 release_file: /etc/sabayon-edition
 
 # ISO Image title
-iso_title: Sabayon Xfce
+iso_title: SABAYON
 
 # Enable XZ compression in mksquashfs
-extra_mksquashfs_parameters: -comp xz
+extra_mksquashfs_parameters: -b 131072 -comp xz
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and before inner_chroot_script)
@@ -71,7 +71,6 @@ packages_to_add:
 	app-misc/sabayon-greeter,
 	app-office/libreoffice,
 	app-text/pastebunz,
-	games-action/minetest_game,
 	games-misc/cowsay,
 	gnome-extra/nm-applet-gtk2,
 	gnome-extra/polkit-gnome,
@@ -81,6 +80,7 @@ packages_to_add:
 	media-libs/libdvdcss,
 	media-libs/libdvdnav,
 	media-libs/libdvdread,
+	media-libs/libopenraw,
 	media-sound/audacious,
 	media-sound/pavucontrol,
 	media-video/totem,

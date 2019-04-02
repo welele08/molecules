@@ -9,10 +9,10 @@ release_string: Sabayon Linux
 release_file: /etc/sabayon-edition
 
 # ISO Image title
-iso_title: Sabayon LXQt
+iso_title: SABAYON
 
 # Enable XZ compression in mksquashfs
-extra_mksquashfs_parameters: -comp xz
+extra_mksquashfs_parameters: -b 131072 -comp xz
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and before inner_chroot_script)
@@ -72,14 +72,16 @@ packages_to_add:
 	media-fonts/dejavu,
 	media-fonts/corefonts,
 	media-libs/libtxc_dxtn,
+	media-libs/libopenraw,
 	media-libs/mesa,
 	net-dialup/globespan-adsl,
 	net-dialup/ppp,
 	net-dialup/rp-pppoe,
 	net-misc/networkmanager,
-	net-misc/networkmanager-openvpn,
-	net-misc/networkmanager-pptp,
-	net-misc/networkmanager-vpnc,
+	net-vpn/networkmanager-openvpn,
+	net-vpn/networkmanager-pptp,
+	net-vpn/networkmanager-vpnc,
+	net-misc/nm-tray,
 	net-misc/ntp,
 	net-print/cups,
 	sys-apps/lsb-release,
@@ -105,6 +107,7 @@ packages_to_add:
 	x11-libs/libva-vdpau-driver,
 	x11-libs/libXxf86misc,
 	x11-misc/lightdm-slick-greeter,
+	x11-misc/xscreensaver,
 	x11-misc/xvkbd,
 	x11-themes/oxygen-gtk:2,
 	x11-themes/oxygen-gtk:3,

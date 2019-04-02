@@ -4,7 +4,9 @@
 . /etc/profile
 
 _get_kernel_tag() {
-	local kernel_ver="$(equo match --installed -qv virtual/linux-binary | cut -d/ -f 2)"
+	#local kernel_ver="$(equo match --installed -qv virtual/linux-binary | cut -d/ -f 2)"
+	local kernel_ver="$(equo match --installed -qv sys-kernel/linux-sabayon | cut -d/ -f 2)"
+
 	# strip -r** if exists, hopefully we don't have PN ending with -r
 	local kernel_ver="${kernel_ver%-r*}"
 	local kernel_tag_file="/etc/kernels/${kernel_ver}/RELEASE_LEVEL"
@@ -31,14 +33,14 @@ install_kernel_packages() {
 sd_enable() {
 	local srv="${1}"
 	local ext=".${2:-service}"
-	[[ -x /usr/bin/systemctl ]] && \
+	[[ -x /bin/systemctl ]] && \
 		systemctl --no-reload enable -f "${srv}${ext}"
 }
 
 sd_disable() {
 	local srv="${1}"
 	local ext=".${2:-service}"
-	[[ -x /usr/bin/systemctl ]] && \
+	[[ -x /bin/systemctl ]] && \
 		systemctl --no-reload disable -f "${srv}${ext}"
 }
 
@@ -101,8 +103,8 @@ setup_displaymanager() {
 		sd_enable lightdm
 	elif [ -n "$(equo match --installed kde-base/kdm -qv)" ]; then
 		sd_enable kdm
-        elif [ -n "$(equo match --installed x11-misc/sddm -qv)" ]; then
-                sd_enable sddm
+  elif [ -n "$(equo match --installed x11-misc/sddm -qv)" ]; then
+    sd_enable sddm
 	else
 		sd_enable xdm
 	fi
@@ -124,8 +126,6 @@ xfceforensic_remove_skel_stuff() {
 	# remove no longer needed folders/files
 	rm -rf /etc/skel/.config/xfce4/desktop
 	rm -rf /etc/skel/.config/xfce4/panel
-	glib-compile-schemas /usr/share/glib-2.0/schemas/
-	gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 }
 
 setup_oss_gfx_drivers() {
@@ -262,6 +262,57 @@ setup_misc_stuff() {
 	if [ -x "/usr/bin/fluxbox-generate_menu" ]; then
 		mkdir -p /root/.fluxbox
 		fluxbox-generate_menu -o /etc/skel/.fluxbox/menu
+	fi
+
+	# Add additional enman repositories:
+	# For customized images
+	if [ -n "${SABAYON_ENMAN_REPOS}" ] ; then
+	  equo i app-admin/enman || exit 1
+
+	  for repos in ${SABAYON_ENMAN_REPOS} ; do
+	    echo "Adding enman repos ${repos}..."
+	    enman add ${repos} || exit 1
+	  done
+
+	  FORCE_EAPI=2 equo update || exit 1
+	fi
+
+	# Unmask packages (used on custom ISO)
+	if [ -n "${SABAYON_UNMASK_PKGS}" ] ; then
+	  touch /etc/entropy/packages/package.unmask
+	  equo unmask ${SABAYON_UNMASK_PKGS[@]}
+	fi
+
+	# mask packages (used on custom ISO)
+	if [ -n "${SABAYON_MASK_PKGS}" ] ; then
+	  touch /etc/entropy/packages/package.mask
+	  equo mask ${SABAYON_MASK_PKGS[@]}
+	fi
+
+	# Add custom packages required from user for source rootfs.
+	if [ -n "${SABAYON_EXTRA_PKGS}" ] ; then
+	  equo i ${SABAYON_EXTRA_PKGS[@]}
+	fi
+
+	if [ -n "${DRACUT}" ]; then
+	  # Dracut initramfs generation for livecd
+	  # XXX: If you are reading this ..beware!
+	  # this step should be re-done by Installer post-install,
+	  # without the options needed to boot from live! (see kernel eclass for reference)
+	  current_kernel=$(equo match --installed "sys-kernel/linux-sabayon" -q --showslot)
+
+	  #ACCEPT_LICENSE=* equo upgrade # upgrading all. this ensures that minor kernel upgrades don't breaks dracut initramfs generation
+	  # Getting Package name and slot from current kernel (e.g. current_kernel=sys-kernel/linux-sabayon:4.7 -> K_SABKERNEL_NAME = linux-sabayon-4.7 )
+	  PN=${current_kernel##*/}
+	  K_SABKERNEL_NAME="${K_SABKERNEL_NAME:-${PN/${PN/-/}-}}"
+	  K_SABKERNEL_NAME="${K_SABKERNEL_NAME/:/-}"
+
+	  # Grab kernel version from RELEASE_LEVEL
+	  kver=$(cat /etc/kernels/$K_SABKERNEL_NAME*/RELEASE_LEVEL)
+	  karch=$(uname -m)
+	  echo "Generating dracut for kernel $kver arch $karch"
+	  dracut -N -a dmsquash-live -a pollcdrom -a systemd -a systemd-initrd -a systemd-networkd -a plymouth -a dracut-systemd \
+	         --force --kver=${kver} /boot/initramfs-genkernel-${karch}-${kver}
 	fi
 }
 

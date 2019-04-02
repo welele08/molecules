@@ -8,6 +8,8 @@ TARGET="${1}"
 # Setup environment vars
 export ACCEPT_LICENSE=*
 
+export SABAYON_INSTALL_KERNEL="${SABAYON_INSTALL_KERNEL:-0}"
+
 PACKAGES_TO_REMOVE=(
   "app-i18n/man-pages-da"
   "app-i18n/man-pages-de"
@@ -60,55 +62,78 @@ done
 safe_run equo upgrade --fetch || exit 1
 equo upgrade --purge || exit 1
 
-# Unmask packages (used on custom ISO)
-if [ -n "${SABAYON_UNMASK_PKGS}" ] ; then
-  touch /etc/entropy/packages/package.unmask
-  equo unmask ${SABAYON_EXTRA_PKGS}
-fi
 
-# Add custom packages required from user for source rootfs.
-if [ -n "${SABAYON_EXTRA_PKGS}" ] ; then
-  safe_run equo i ${SABAYON_EXTRA_PKGS[@]}
+# FIXME: Dup in iner_chroot_script.sh
+# We need plymouth before
+equo i sys-boot/plymouth x11-themes/sabayon-artwork-plymouth-default
+
+echo "PLYMOUTH THEME LIST:"
+plymouth-set-default-theme --list
+# Set Plymouth default theme, newer artwork has the sabayon theme
+is_ply_sabayon=$(plymouth-set-default-theme --list | grep sabayon)
+if [ -n "${is_ply_sabayon}" ]; then
+	plymouth-set-default-theme sabayon
+else
+	plymouth-set-default-theme solar
 fi
 
 equo remove "${PACKAGES_TO_REMOVE[@]}" # ignore
 echo "-5" | equo conf update
 
-# check if a kernel update is needed
-kernel_target_pkg="$(equo match -q --installed virtual/linux-binary)"
-current_kernel=$(equo match --installed "${kernel_target_pkg}" -q --showslot)
+if [[ ${SABAYON_INSTALL_KERNEL} -eq 1 ]] ; then
+  # check if a kernel update is needed
+  kernel_target_pkg="$(equo match -q --installed virtual/linux-binary)"
+  current_kernel=$(equo match --installed "${kernel_target_pkg}" -q --showslot)
 
-echo "Move to kernel ${kernel_target_pkg}:${SABAYON_KERNEL_VERSION}"
-# Do not pick for now latest kernel, but fix it to 4.14
-#available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
-available_kernel="sys-kernel/linux-sabayon:${SABAYON_KERNEL_VERSION}"
+  echo "Move to kernel ${kernel_target_pkg}:${SABAYON_KERNEL_VERSION}"
+  # Do not pick for now latest kernel, but fix it to 4.14
+  #available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
+  available_kernel="sys-kernel/linux-sabayon:${SABAYON_KERNEL_VERSION}"
 
-if [ "${current_kernel}" != "${available_kernel}" ] && \
-  [ -n "${available_kernel}" ] && [ -n "${current_kernel}" ]; then
-  echo
-  echo "@@ Upgrading kernel to ${available_kernel}"
-  echo
-  safe_run kernel-switcher switch "${available_kernel}" || exit 1
-  equo remove "${current_kernel}" || exit 1
-  # now delete stale files in /lib/modules
-  for slink in $(find /lib/modules/ -type l); do
-    if [ ! -e "${slink}" ]; then
-      echo "Removing broken symlink: ${slink}"
-      rm "${slink}" # ignore failure, best effort
-      # check if parent dir is empty, in case, remove
-      paren_slink=$(dirname "${slink}")
-      paren_children=$(find "${paren_slink}")
-      if [ -z "${paren_children}" ]; then
-        echo "${paren_slink} is empty, removing"
-        rmdir "${paren_slink}" # ignore failure, best effort
+  if [ "${current_kernel}" != "${available_kernel}" ] && \
+    [ -n "${available_kernel}" ]; then
+    echo
+    echo "@@ Upgrading kernel to ${available_kernel}"
+    echo
+    safe_run kernel-switcher switch "${available_kernel}" || exit 1
+    [ -n "${current_kernel}" ] && equo remove "${current_kernel}"
+    # now delete stale files in /lib/modules
+    for slink in $(find /lib/modules/ -type l); do
+      if [ ! -e "${slink}" ]; then
+        echo "Removing broken symlink: ${slink}"
+        rm "${slink}" # ignore failure, best effort
+        # check if parent dir is empty, in case, remove
+        paren_slink=$(dirname "${slink}")
+        paren_children=$(find "${paren_slink}")
+        if [ -z "${paren_children}" ]; then
+          echo "${paren_slink} is empty, removing"
+          rmdir "${paren_slink}" # ignore failure, best effort
+        fi
       fi
-    fi
-  done
-else
-  echo "@@ Not upgrading kernels:"
-  echo "Current: ${current_kernel}"
-  echo "Avail:   ${available_kernel}"
-  echo
+    done
+  else
+    echo "@@ Not upgrading kernels:"
+    echo "Current: ${current_kernel}"
+    echo "Avail:   ${available_kernel}"
+    echo
+  fi
+fi
+
+# Unmask packages (used on custom ISO)
+if [ -n "${SABAYON_UNMASK_PKGS}" ] ; then
+  touch /etc/entropy/packages/package.unmask
+  equo unmask ${SABAYON_UNMASK_PKGS[@]}
+fi
+
+# mask packages (used on custom ISO)
+if [ -n "${SABAYON_MASK_PKGS}" ] ; then
+  touch /etc/entropy/packages/package.mask
+  equo mask ${SABAYON_MASK_PKGS[@]}
+fi
+
+# Add custom packages required from user for source rootfs.
+if [ -n "${SABAYON_EXTRA_PKGS}" ] ; then
+  safe_run equo i ${SABAYON_EXTRA_PKGS[@]}
 fi
 
 # keep /lib/modules clean at all times
@@ -148,10 +173,12 @@ for conf in 00-sabayon.package.use 00-sabayon.package.mask \
   fi
 done
 
-# Dracut initramfs generation for livecd
-# If you are reading this ..beware! this step should be re-done by Installer post-install, without the options needed to boot from live! (see kernel eclass for reference)
-current_kernel=$(equo match --installed "${kernel_target_pkg}" -q --showslot) #Update it! we may have upgraded
-if equo s --verbose --installed $current_kernel | grep -q " dracut"; then
+if [ -n "${DRACUT}" ]; then
+  # Dracut initramfs generation for livecd
+  # XXX: If you are reading this ..beware!
+  # this step should be re-done by Installer post-install,
+  # without the options needed to boot from live! (see kernel eclass for reference)
+  current_kernel=$(equo match --installed "sys-kernel/linux-sabayon" -q --showslot)
 
   #ACCEPT_LICENSE=* equo upgrade # upgrading all. this ensures that minor kernel upgrades don't breaks dracut initramfs generation
   # Getting Package name and slot from current kernel (e.g. current_kernel=sys-kernel/linux-sabayon:4.7 -> K_SABKERNEL_NAME = linux-sabayon-4.7 )
@@ -163,10 +190,9 @@ if equo s --verbose --installed $current_kernel | grep -q " dracut"; then
   kver=$(cat /etc/kernels/$K_SABKERNEL_NAME*/RELEASE_LEVEL)
   karch=$(uname -m)
   echo "Generating dracut for kernel $kver arch $karch"
-  dracut -N -a dmsquash-live -a pollcdrom -o systemd -o systemd-initrd -o systemd-networkd -o dracut-systemd --force --kver=${kver} /boot/initramfs-genkernel-${karch}-${kver}
-
+  dracut -N -a dmsquash-live -a pollcdrom -a systemd -a systemd-initrd -a systemd-networkd -a plymouth -a dracut-systemd \
+         --force --kver=${kver} /boot/initramfs-genkernel-${karch}-${kver}
 fi
-
 
 # Update /usr/portage/profiles
 # This is actually not strictly needed but several
