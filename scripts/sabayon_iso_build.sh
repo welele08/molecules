@@ -355,7 +355,7 @@ export_docker_rootfs () {
     return 1
   fi
 
-  echo "nameserver 1.1.1.1" > ${targetdir}/etc/resolv.conf
+  echo "nameserver 172.23.16.253" > ${targetdir}/etc/resolv.conf
   echo "nameserver 8.8.8.8" >> ${targetdir}/etc/resolv.conf
 
   if [ ! -e "${undocker_output_directory}/dev/urandom" ]; then
