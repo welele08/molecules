@@ -18,7 +18,7 @@ mount --bind "${PKGS_DIR}" "${CHROOT_PKGS_DIR}" || exit 1
 # Ajout du repo privé capesos
 echo "cp capesos repo file to ${CHROOT_DIR}/etc/entropy/repositories.conf.d/"
 cp /etc/entropy/repositories.conf.d/capesos ${CHROOT_DIR}/etc/entropy/repositories.conf.d/
-
+cp /etc/resolv.conf ${CHROOT_DIR}/etc/
 content=$(ls -1 "${CHROOT_DIR}/proc" | wc -l)
 if [ "${content}" -le 3 ]; then
 	echo "Mounting /proc ..."
