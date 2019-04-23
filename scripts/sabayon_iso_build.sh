@@ -89,6 +89,8 @@ get_iso_name () {
     echo "MATE"
   elif [ ${image} == "xfce" ] ; then
     echo "Xfce"
+  elif [ ${image} == "capesos" ] ; then
+    echo "capesos"
   elif [ ${image} == "minimal" ] ; then
     echo "Minimal"
   elif [ ${image} == "server" ] ; then
