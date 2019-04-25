@@ -1,0 +1,25 @@
+# This module contains packages that images shipping with X.Org should have
+
+# sabayon-skel required to make anaconda autostart
+# x11-libs/libXxf86misc required by xset
+packages_to_add:
+	@X,
+	app-arch/unrar,
+	app-misc/sabayon-live,
+	app-misc/capesos-skel,
+	media-fonts/dejavu,
+	media-fonts/corefonts,
+	media-libs/libtxc_dxtn,
+	media-libs/mesa,
+	sys-apps/lsb-release,
+	sys-apps/usb_modeswitch,
+	sys-apps/which,
+	sys-process/htop,
+	x11-apps/xhost,
+	x11-apps/setxkbmap,
+	x11-themes/equinox-themes,
+	x11-themes/gtk-engines:2,
+	x11-themes/hicolor-icon-theme,
+	x11-themes/iottinka-artwork,
+	x11-terms/xterm,
+	x11-libs/libXxf86misc,

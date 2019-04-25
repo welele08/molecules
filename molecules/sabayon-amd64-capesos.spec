@@ -5,9 +5,15 @@
 %env release_version: ${SABAYON_RELEASE:-LATEST}
 release_desc: amd64 Xfce
 
-%env outer_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/toto.sh
 
 %env source_iso: ${SABAYON_MOLECULE_HOME:-/sabayon}/iso/Sabayon_Linux_${ISO_TAG:-LATEST}_amd64_SpinBase.iso
 %env destination_iso_image_name: Sabayon_Linux_${SABAYON_RELEASE:-LATEST}_amd64_Xfce.iso
 packages_to_add:
     sci-mathematics/giac
+    app-misc/capesos-skel
+    x11-themes/capesos-artwork-wallpapers
+    x11-themes/Humanity-Dark-Aqua-icon-theme
+    x11-themes/capesos-artwork-lightdm-slick-greeter
+    x11-themes/capesos-artwork-grub
+    x11-themes/capesos-artwork-isolinux
+    x11-themes/capesos-artwork-core
