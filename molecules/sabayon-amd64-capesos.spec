@@ -24,3 +24,5 @@ packages_to_add:
     app-editors/atom
     dev-python/notebook-capesos-icon
     gnome-base/nautilus
+    gnome-extra/gnome-calculator-capesos-icon
+    sci-mathematics/xcas-icon-capesos
