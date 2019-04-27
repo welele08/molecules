@@ -17,3 +17,10 @@ packages_to_add:
     x11-themes/capesos-artwork-grub
     x11-themes/capesos-artwork-isolinux
     x11-themes/capesos-artwork-core
+    x11-apps/capesos-screencapture
+    x11-misc/blackscreen
+    gnome-extra/gnome-calculator
+    app-docs/zeal
+    app-editors/atom
+    dev-python/notebook-capesos-icon
+    gnome-base/nautilus
