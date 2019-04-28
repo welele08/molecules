@@ -23,7 +23,7 @@ extra_mksquashfs_parameters: -comp xz
 
 # Inner chroot script command, to be executed inside destination chroot after
 # packages installation and removal
-%env inner_chroot_script_after: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_generic_inner_chroot_script_after.sh xfce
+%env inner_chroot_script_after: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_generic_inner_chroot_script_after.sh capesos
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and AFTER inner_chroot_script)
@@ -40,7 +40,7 @@ extra_mksquashfs_parameters: -comp xz
 
 # List of packages that would be removed from chrooted system (comma separated)
 #packages_to_remove:
-#	app-misc/sabayon-skel
+	app-misc/sabayon-skel
 # Import the Graphic Environment module.
 %env %import ${SABAYON_MOLECULE_HOME:-/sabayon}/molecules/graphic-environment-capes.common
 

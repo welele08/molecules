@@ -431,6 +431,9 @@ prepare_system() {
 		prepare_e17
 	elif [ "${de}" = "xfce" ]; then
 		prepare_xfce
+	elif [ "${de}" = "capesos" ]; then
+		prepare_xfce
+		install_packages capesos-skel
 	elif [ "${de}" = "fluxbox" ]; then
 		prepare_fluxbox
 	elif [ "${de}" = "gnome" ]; then
