@@ -19,7 +19,9 @@ if [ -n "${boot_kernel}" ] && [ -f "${boot_kernel}" ]; then
 	cp "${boot_kernel}" "${CDROOT_DIR}/boot/sabayon" || exit 1
 	cp "${boot_ramfs}" "${CDROOT_DIR}/boot/sabayon.igz" || exit 1
 fi
-
+if [ "${remaster_type}" = "capesos" ]; then
+	cp -r "${SABAYON_MOLECULE_HOME}/remaster/capesos/etc" "${CHROOT_DIR}/"|| exit 1
+fi
 if [ "${remaster_type}" = "KDE" ] || [ "${remaster_type}" = "GNOME" ]; then
 	isolinux_source="${SABAYON_MOLECULE_HOME}/remaster/standard_isolinux.cfg"
 	grub_source="${SABAYON_MOLECULE_HOME}/remaster/standard_grub.cfg"

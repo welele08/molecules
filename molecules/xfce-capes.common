@@ -27,7 +27,7 @@ extra_mksquashfs_parameters: -comp xz
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and AFTER inner_chroot_script)
-%env outer_chroot_script_after: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_post.sh
+%env outer_chroot_script_after: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_post_capesos.sh
 
 # Used to umount /proc and unbind packages dir
 %env error_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_error_script.sh
