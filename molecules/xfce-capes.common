@@ -9,7 +9,7 @@ release_string: Sabayon Linux
 release_file: /etc/sabayon-edition
 
 # ISO Image title
-iso_title: Sabayon Xfce
+iso_title: Capesos
 
 # Enable XZ compression in mksquashfs
 extra_mksquashfs_parameters: -comp xz
@@ -138,7 +138,7 @@ packages_to_add:
 # instead of gnome-panel)
 
 # Custom shell call to packages add (default is: equo install)
-# custom_packages_add_cmd: 
+# custom_packages_add_cmd:
 
 # Custom command for updating repositories (default is: equo update)
 # repositories_update_cmd:
