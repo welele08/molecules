@@ -434,6 +434,7 @@ prepare_system() {
 	elif [ "${de}" = "capesos" ]; then
 		prepare_xfce
 		install_packages capesos-skel
+		etc-update --automode -3
 		plymouth-set-default-theme capesos
 	elif [ "${de}" = "fluxbox" ]; then
 		prepare_fluxbox
