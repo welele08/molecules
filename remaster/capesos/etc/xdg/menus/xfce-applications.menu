@@ -1,0 +1,44 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+  "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+
+<Menu>
+    <Name>Xfce</Name>
+
+    <DefaultAppDirs/>
+    <DefaultDirectoryDirs/>
+    <DefaultMergeDirs/>
+
+    <Include>
+        <Category>CAPESOS</Category>
+    </Include>
+
+    <Layout>
+        <Filename>CAPESOS-file-manager.desktop</Filename>
+        <Filename>CAPESOS-capture.desktop</Filename>
+        <Separator/>
+        <Menuname>Logiciels</Menuname>
+        <Merge type="all"/>
+        <Separator/>
+        <Filename>CAPESOS-session-logout.desktop</Filename>
+    </Layout>
+
+    <Menu>
+        <Name>Logiciels</Name>
+        <Directory>CAPESOS-Logiciels.directory</Directory>
+        <Include>
+            <Category>CAPESOS-Logiciels</Category>
+        </Include>
+        <Layout>
+            <Menuname>LibreOffice</Menuname>
+            <Merge type="all"/>
+        </Layout>
+        <Menu>
+            <Name>LibreOffice</Name>
+            <Directory>CAPESOS-LibreOffice.directory</Directory>
+            <Include>
+                <Category>CAPESOS-LibreOffice</Category>
+            </Include>
+        </Menu>
+    </Menu>
+
+</Menu>
