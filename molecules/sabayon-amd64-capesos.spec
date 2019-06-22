@@ -17,6 +17,7 @@ packages_to_add:
     x11-themes/capesos-artwork-grub
     x11-themes/capesos-artwork-isolinux
     x11-themes/capesos-artwork-core
+    x11-themes/capesos-artwork-plymouth
     x11-apps/capesos-screencapture
     x11-misc/blackscreen
     gnome-extra/gnome-calculator
@@ -26,3 +27,6 @@ packages_to_add:
     gnome-base/nautilus
     gnome-extra/gnome-calculator-capesos-icon
     sci-mathematics/xcas-icon-capesos
+    sci-mathematics/geogebra
+    app-docs/zeal
+    dev-db/sqlitebrowser-icon-capesos
