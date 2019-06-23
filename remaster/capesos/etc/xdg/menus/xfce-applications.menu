@@ -19,6 +19,7 @@
         <Menuname>Logiciels</Menuname>
         <Merge type="all"/>
         <Separator/>
+        <Menuname>Parametres</Menuname>
         <Filename>CAPESOS-session-logout.desktop</Filename>
     </Layout>
 
@@ -39,6 +40,14 @@
                 <Category>CAPESOS-LibreOffice</Category>
             </Include>
         </Menu>
+    </Menu>
+
+    <Menu>
+        <Name>Parametres</Name>
+        <Directory>CAPESOS-Parametres.directory</Directory>
+        <Include>
+            <Category>CAPESOS-Parametres</Category>
+        </Include>
     </Menu>
 
 </Menu>
