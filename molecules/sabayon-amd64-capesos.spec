@@ -28,5 +28,5 @@ packages_to_add:
     gnome-extra/gnome-calculator-capesos-icon
     sci-mathematics/xcas-icon-capesos
     sci-mathematics/geogebra
-    app-docs/zeal
+    app-doc/zeal-icon-capesos
     dev-db/sqlitebrowser-icon-capesos
