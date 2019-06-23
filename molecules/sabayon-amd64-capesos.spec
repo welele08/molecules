@@ -30,3 +30,5 @@ packages_to_add:
     sci-mathematics/geogebra
     app-doc/zeal-icon-capesos
     dev-db/sqlitebrowser-icon-capesos
+    app-editors/vim
+    www-client/chromium
