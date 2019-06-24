@@ -35,3 +35,4 @@ packages_to_add:
     app-office/libreoffice-icon-capesos
     app-doc/ressources-officielles-math
     sci-calculators/Numworks
+    dev-python/Pyzo
