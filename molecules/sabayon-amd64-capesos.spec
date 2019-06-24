@@ -32,3 +32,5 @@ packages_to_add:
     dev-db/sqlitebrowser-icon-capesos
     app-editors/vim
     www-client/chromium
+    app-office/libreoffice-icon-capesos
+    app-doc/ressources-officielles-math
