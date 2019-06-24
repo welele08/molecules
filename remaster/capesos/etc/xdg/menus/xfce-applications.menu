@@ -17,7 +17,6 @@
         <Filename>CAPESOS-capture.desktop</Filename>
         <Separator/>
         <Menuname>Logiciels</Menuname>
-        <Merge type="all"/>
         <Separator/>
         <Menuname>Parametres</Menuname>
         <Filename>CAPESOS-session-logout.desktop</Filename>
