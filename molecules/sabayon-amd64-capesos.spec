@@ -34,3 +34,4 @@ packages_to_add:
     www-client/chromium
     app-office/libreoffice-icon-capesos
     app-doc/ressources-officielles-math
+    sci-calculators/Numworks
