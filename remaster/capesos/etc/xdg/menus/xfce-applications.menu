@@ -17,6 +17,7 @@
         <Filename>CAPESOS-capture.desktop</Filename>
         <Separator/>
         <Menuname>Logiciels</Menuname>
+        <Filename>CAPESOS-ressources_officielles.desktop</Filename>
         <Separator/>
         <Menuname>Parametres</Menuname>
         <Filename>CAPESOS-session-logout.desktop</Filename>
