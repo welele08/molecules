@@ -37,3 +37,4 @@ packages_to_add:
     sci-calculators/Numworks
     dev-python/Pyzo
     sci-mathematics/scratch3-ac-grenoble
+    app-text/lecteur_pdf
