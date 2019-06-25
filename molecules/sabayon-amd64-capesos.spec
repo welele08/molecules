@@ -36,3 +36,4 @@ packages_to_add:
     app-doc/ressources-officielles-math
     sci-calculators/Numworks
     dev-python/Pyzo
+    sci-mathematics/scratch3-ac-grenoble
