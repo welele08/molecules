@@ -436,6 +436,10 @@ prepare_system() {
 		install_packages capesos-skel
 		etc-update --automode -3
 		plymouth-set-default-theme capesos
+		update-mime-database /usr/share/mime
+		gtk-update-icon-cache -f -t /usr/share/icons/Humanity-Dark-Aqua/
+		update-desktop-database /usr/share/applications/
+		env-update
 	elif [ "${de}" = "fluxbox" ]; then
 		prepare_fluxbox
 	elif [ "${de}" = "gnome" ]; then
