@@ -3,8 +3,9 @@
 # Path to molecules.git dir
 SABAYON_MOLECULE_HOME="${SABAYON_MOLECULE_HOME:-/sabayon}"
 export SABAYON_MOLECULE_HOME
-cp "${SABAYON_MOLECULE_HOME}/remaster/capesos/etc/xdg/menus/xfce-applications.menu" "${CHROOT_DIR}/etc/xdg/menus/"
-
+#cp "${SABAYON_MOLECULE_HOME}/remaster/capesos/etc/xdg/menus/xfce-applications.menu" "${CHROOT_DIR}/etc/xdg/menus/"
+cp -r "${SABAYON_MOLECULE_HOME}/remaster/capesos/etc" "${CHROOT_DIR}"|| exit 1
+cp -r "${SABAYON_MOLECULE_HOME}/remaster/capesos/usr" "${CHROOT_DIR}"|| exit 1
 PKGS_DIR="${SABAYON_MOLECULE_HOME}/pkgcache"
 CHROOT_PKGS_DIR="${CHROOT_DIR}/var/lib/entropy/client/packages"
 
