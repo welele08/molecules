@@ -38,4 +38,5 @@ packages_to_add:
     dev-python/Pyzo
     sci-mathematics/scratch3-ac-grenoble
     app-text/lecteur_pdf
+    sci-mathematics/scilab
     net-analyzer/zabbix
