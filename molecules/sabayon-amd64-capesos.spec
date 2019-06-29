@@ -40,6 +40,10 @@ packages_to_add:
     app-text/lecteur_pdf
     sci-mathematics/scilab
     net-analyzer/zabbix
+    dev-python/numpy
+    sci-libs/scipy
+    dev-python/matplotlib
+    dev-python/pillow
     app-doc/matplotlib-dash-docset
     app-doc/python2-dash-docset
     app-doc/python3-dash-docset
