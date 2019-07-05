@@ -49,3 +49,4 @@ packages_to_add:
     app-doc/python3-dash-docset
     app-doc/scipy-dash-docset
     app-doc/numpy-dash-docset
+    app-admin/lsyncd
