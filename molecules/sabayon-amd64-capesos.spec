@@ -44,9 +44,12 @@ packages_to_add:
     sci-libs/scipy
     dev-python/matplotlib
     dev-python/pillow
+    dev-python/imageio
     app-doc/matplotlib-dash-docset
     app-doc/python2-dash-docset
     app-doc/python3-dash-docset
     app-doc/scipy-dash-docset
     app-doc/numpy-dash-docset
     app-admin/lsyncd
+    dev-lang/python::capesos
+
