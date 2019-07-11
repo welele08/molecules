@@ -53,3 +53,4 @@ packages_to_add:
     app-admin/lsyncd
     dev-lang/python:2.7::capesos
     dev-lang/python:3.6::capesos
+    net-vpn/openvpn
