@@ -51,5 +51,5 @@ packages_to_add:
     app-doc/scipy-dash-docset
     app-doc/numpy-dash-docset
     app-admin/lsyncd
-    dev-lang/python::capesos
-
+    dev-lang/python:2.7::capesos
+    dev-lang/python:3.6::capesos
