@@ -3,11 +3,11 @@
 %env %import ${SABAYON_MOLECULE_HOME:-/sabayon}/molecules/amd64.common
 
 %env release_version: ${SABAYON_RELEASE:-LATEST}
-release_desc: amd64 Xfce
+release_desc: amd64 capesos
 
 
 %env source_iso: ${SABAYON_MOLECULE_HOME:-/sabayon}/iso/Sabayon_Linux_${ISO_TAG:-LATEST}_amd64_SpinBase.iso
-%env destination_iso_image_name: Sabayon_Linux_${SABAYON_RELEASE:-LATEST}_amd64_Xfce.iso
+%env destination_iso_image_name: Sabayon_Linux_${SABAYON_RELEASE:-LATEST}_amd64_capesos.iso
 packages_to_add:
     sci-mathematics/giac
     app-misc/capesos-skel
@@ -54,3 +54,11 @@ packages_to_add:
     dev-lang/python:2.7::capesos
     dev-lang/python:3.6::capesos
     net-vpn/openvpn
+    net-misc/capesos-primitiveComm
+    net-misc/mkhosts
+    net-misc/test-vpn
+    net-misc/capesos-vpn-config-client
+    app-misc/login-script
+    net-misc/mkhosts
+    net-misc/gestion-doc-candidat-serveur
+
