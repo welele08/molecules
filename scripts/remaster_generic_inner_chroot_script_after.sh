@@ -440,6 +440,8 @@ prepare_system() {
 		gtk-update-icon-cache -f -t /usr/share/icons/Humanity-Dark-Aqua/
 		update-desktop-database /usr/share/applications/
 		env-update
+		systemctl disable lightdm
+		systemctl enable sddm
 	elif [ "${de}" = "fluxbox" ]; then
 		prepare_fluxbox
 	elif [ "${de}" = "gnome" ]; then
