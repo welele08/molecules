@@ -1,0 +1,32 @@
+# Use abs path, otherwise daily builds automagic won't work
+%env %import ${SABAYON_MOLECULE_HOME:-/sabayon}/molecules/xfce-capes.common
+%env %import ${SABAYON_MOLECULE_HOME:-/sabayon}/molecules/amd64.common
+
+%env release_version: ${SABAYON_RELEASE:-LATEST}
+release_desc: amd64 capesos
+
+
+%env source_iso: ${SABAYON_MOLECULE_HOME:-/sabayon}/iso/Sabayon_Linux_${ISO_TAG:-LATEST}_amd64_SpinBase.iso
+packages_to_add:
+#system
+  app-misc/capesos-skel
+  x11-themes/capesos-artwork-wallpapers
+  x11-themes/Humanity-Dark-Aqua-icon-theme
+  x11-themes/capesos-artwork-lightdm-slick-greeter
+  x11-themes/capesos-artwork-grub
+  x11-themes/capesos-artwork-isolinux
+  x11-themes/capesos-artwork-core
+  x11-themes/capesos-artwork-plymouth
+#logiciels_commun
+  x11-apps/capesos-screencapture
+  x11-misc/blackscreen
+  app-docs/zeal
+  app-doc/zeal-icon-capesos
+  gnome-base/nautilus
+  app-editors/vim
+  www-client/chromium
+  app-office/libreoffice-icon-capesos
+  app-editors/atom
+
+#logiciels_info?
+  dev-db/sqlitebrowser-icon-capesos

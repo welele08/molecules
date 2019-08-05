@@ -1,0 +1,12 @@
+packages_to_add:
+#outils-session
+    app-misc/login-script
+    app-admin/lsyncd
+    net-vpn/openvpn
+    net-misc/capesos-primitiveComm
+    net-misc/mkhosts
+    net-misc/test-vpn
+    net-misc/capesos-vpn-config-client
+    net-misc/mkhosts
+    net-misc/gestion-doc-candidat-serveur
+    net-analyzer/zabbix
