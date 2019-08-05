@@ -91,6 +91,10 @@ get_iso_name () {
     echo "Xfce"
   elif [ ${image} == "capesos" ] ; then
     echo "capesos"
+  elif [ ${image} == "capesos-math" ] ; then
+    echo "capesos"
+  elif [ ${image} == "capesos-math-session" ] ; then
+    echo "capesos"
   elif [ ${image} == "minimal" ] ; then
     echo "Minimal"
   elif [ ${image} == "server" ] ; then
@@ -547,6 +551,8 @@ SABAYON_ENMAN_REPOS     Define additional enman repository to install
       "xfce"
       "lxqt"
       "capesos"
+      "capesos-math"
+      "capesos-math-session"
     )
 
     if [ $# -eq 0 ] ; then
