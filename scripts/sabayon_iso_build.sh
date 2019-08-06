@@ -92,9 +92,9 @@ get_iso_name () {
   elif [ ${image} == "capesos" ] ; then
     echo "capesos"
   elif [ ${image} == "capesos-math" ] ; then
-    echo "capesos"
+    echo "capesos-math"
   elif [ ${image} == "capesos-math-session" ] ; then
-    echo "capesos"
+    echo "capesos-math-session"
   elif [ ${image} == "minimal" ] ; then
     echo "Minimal"
   elif [ ${image} == "server" ] ; then
