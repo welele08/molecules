@@ -17,10 +17,11 @@ packages_to_add:
   x11-themes/capesos-artwork-isolinux
   x11-themes/capesos-artwork-core
   x11-themes/capesos-artwork-plymouth
+  x11-misc/sddm
 #logiciels_commun
   x11-apps/capesos-screencapture
   x11-misc/blackscreen
-  app-docs/zeal
+  app-doc/zeal
   app-doc/zeal-icon-capesos
   gnome-base/nautilus
   app-editors/vim
