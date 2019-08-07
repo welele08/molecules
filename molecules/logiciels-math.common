@@ -7,7 +7,6 @@ packages_to_add:
     sci-calculators/Numworks
     sci-mathematics/geogebra
     app-doc/ressources-officielles-math
-    dev-python/Pyzo
     sci-mathematics/scratch3-ac-grenoble
     app-text/lecteur_pdf
     sci-mathematics/scilab
@@ -16,6 +15,7 @@ packages_to_add:
     app-doc/python2-dash-docset
     dev-lang/python:3.6::capesos
     app-doc/python3-dash-docset
+    dev-python/Pyzo
     dev-python/notebook-capesos-icon
     dev-python/numpy
     app-doc/numpy-dash-docset
