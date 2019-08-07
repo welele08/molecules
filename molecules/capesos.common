@@ -27,6 +27,3 @@ packages_to_add:
   www-client/chromium
   app-office/libreoffice-icon-capesos
   app-editors/atom
-
-#logiciels_info?
-  dev-db/sqlitebrowser-icon-capesos

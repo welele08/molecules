@@ -95,6 +95,10 @@ get_iso_name () {
     echo "capesos-math"
   elif [ ${image} == "capesos-math-session" ] ; then
     echo "capesos-math-session"
+  elif [ ${image} == "capesos-info" ] ; then
+    echo "capesos-info"
+  elif [ ${image} == "capesos-info-session" ] ; then
+    echo "capesos-info-session"
   elif [ ${image} == "minimal" ] ; then
     echo "Minimal"
   elif [ ${image} == "server" ] ; then
@@ -553,6 +557,8 @@ SABAYON_ENMAN_REPOS     Define additional enman repository to install
       "capesos"
       "capesos-math"
       "capesos-math-session"
+      "capesos-info"
+      "capesos-info-session"
     )
 
     if [ $# -eq 0 ] ; then

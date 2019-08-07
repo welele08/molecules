@@ -1,0 +1,18 @@
+packages_to_add:
+#logiciels_info?
+  dev-db/sqlitebrowser-icon-capesos
+  
+#Python
+    dev-lang/python:2.7::capesos
+    app-doc/python2-dash-docset
+    dev-lang/python:3.6::capesos
+    app-doc/python3-dash-docset
+    dev-python/notebook-capesos-icon
+    dev-python/numpy
+    app-doc/numpy-dash-docset
+    sci-libs/scipy
+    app-doc/scipy-dash-docset
+    dev-python/matplotlib
+    app-doc/matplotlib-dash-docset
+    dev-python/pillow
+    dev-python/imageio
